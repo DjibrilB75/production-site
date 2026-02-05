@@ -163,3 +163,176 @@ a {
 .gsap-marker-scroller-end {
   font-size: 10px !important;
 }
+
+/* ========================================
+   PETROL FLUID EFFECTS
+   ======================================== */
+
+/* Keyframes for petrol flow animation */
+@keyframes petrolFlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Petrol fluid gradient for text */
+.petrol-text {
+  background: linear-gradient(
+    90deg,
+    #8b5cf6,
+    #3b82f6,
+    #ec4899,
+    #ef4444,
+    #f97316,
+    #fbbf24,
+    #8b5cf6
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 4s linear infinite;
+}
+
+/* Petrol fluid border for elements */
+.petrol-border {
+  position: relative;
+  border-radius: 16px;
+  overflow: visible;
+}
+
+.petrol-border::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 18px;
+  padding: 3px;
+  background: linear-gradient(
+    45deg,
+    #8b5cf6,
+    #3b82f6,
+    #ec4899,
+    #ef4444,
+    #f97316,
+    #fbbf24,
+    #8b5cf6
+  );
+  background-size: 300% 300%;
+  animation: petrolFlow 6s ease infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+}
+
+/* Petrol Shiny Background - Animated gradient */
+.petrol-shiny-bg {
+  background: linear-gradient(
+    135deg,
+    #0f0f1a 0%,
+    #1a1025 15%,
+    #0d1520 30%,
+    #151030 45%,
+    #0a0a15 60%,
+    #1a0a20 75%,
+    #0f1520 90%,
+    #0f0f1a 100%
+  );
+  background-size: 400% 400%;
+  animation: petrolShinyBg 15s ease infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.petrol-shiny-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(59, 130, 246, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 40% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 70%, rgba(249, 115, 22, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 10% 60%, rgba(251, 191, 36, 0.06) 0%, transparent 50%);
+  animation: petrolShinyOverlay 20s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.petrol-shiny-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(139, 92, 246, 0.03) 25%,
+    transparent 50%,
+    rgba(236, 72, 153, 0.03) 75%,
+    transparent 100%
+  );
+  background-size: 200% 200%;
+  animation: petrolShine 8s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes petrolShinyBg {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 100%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 0%;
+  }
+}
+
+@keyframes petrolShinyOverlay {
+  0% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes petrolShine {
+  0% {
+    background-position: 200% 200%;
+  }
+  100% {
+    background-position: -200% -200%;
+  }
+}
+
+/* Petrol gradient for progress bar */
+.petrol-gradient-bg {
+  background: linear-gradient(
+    90deg,
+    #8b5cf6,
+    #3b82f6,
+    #ec4899,
+    #f97316,
+    #fbbf24,
+    #8b5cf6
+  );
+  background-size: 200% 100%;
+  animation: petrolFlow 3s linear infinite;
+}
