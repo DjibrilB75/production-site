@@ -83,7 +83,7 @@ export default function ScrollPinGallery() {
     <>
       <section
         ref={sectionRef}
-        id="work"
+        id="portfolio"
         className="relative petrol-shiny-bg min-h-screen"
       >
         {/* Section Header */}

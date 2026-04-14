@@ -1,37 +1,16 @@
 import type { Metadata } from 'next'
-import { Sora, Inter, Playfair_Display } from 'next/font/google'
 import './globals.css'
 
-const sora = Sora({
-  subsets: ['latin'],
-  variable: '--font-sora',
-  display: 'swap',
-  weight: ['400', '600', '700'],
-})
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-})
-
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  variable: '--font-playfair',
-  display: 'swap',
-  weight: ['400', '500', '600'],
-})
-
 export const metadata: Metadata = {
-  title: 'Production Studio | Crafting Visual Stories',
-  description: 'Premium production agency specializing in commercial videography, cinematography, and visual storytelling. Creating immersive visual experiences for brands worldwide.',
-  keywords: ['production', 'videography', 'cinematography', 'commercial', 'brand film', 'visual storytelling'],
-  authors: [{ name: 'Production Studio' }],
+  title: 'Sophie Laroche | Photographe de Mariage',
+  description: 'Photographe de mariage haut de gamme — L\'art de capturer l\'amour. Reportages de mariage luxueux en France et à l\'international.',
+  keywords: ['photographe mariage', 'wedding photographer', 'photographie mariage luxe', 'reportage mariage', 'Paris', 'France'],
+  authors: [{ name: 'Sophie Laroche' }],
   openGraph: {
-    title: 'Production Studio | Crafting Visual Stories',
-    description: 'Premium production agency specializing in commercial videography and visual storytelling.',
+    title: 'Sophie Laroche | Photographe de Mariage',
+    description: 'L\'art de capturer l\'amour — Reportages de mariage luxueux en France et à l\'international.',
     type: 'website',
-    locale: 'en_US',
+    locale: 'fr_FR',
   },
 }
 
@@ -41,10 +20,17 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body
-        className={`${sora.variable} ${inter.variable} ${playfair.variable} antialiased bg-dark-900 text-white`}
-      >
+    <html lang="fr" className="scroll-smooth">
+      <head>
+        {/* Google Fonts – loaded via standard link for environment compatibility */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Cinzel:wght@400;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="antialiased bg-dark-900 text-white">
         {children}
       </body>
     </html>

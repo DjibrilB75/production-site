@@ -3,20 +3,40 @@
 @tailwind utilities;
 
 :root {
+  /* ── Font families (loaded via Google Fonts CDN <link>) ── */
+  --font-cormorant: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-dm-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-cinzel: 'Cinzel', 'Trajan Pro', Georgia, serif;
+
   --background: #0a0a0f;
   --foreground: #ffffff;
 
-  /* Holographic colors */
+  /* ── Gold / Luxury palette ── */
+  --gold-50:  #fdf8ec;
+  --gold-100: #f9edca;
+  --gold-200: #f2d98f;
+  --gold-300: #e8c26a;
+  --gold-400: #d4aa46;
+  --gold-500: #C9A84C;   /* primary brand gold */
+  --gold-600: #a8882e;
+  --gold-700: #7e641f;
+  --gold-800: #554214;
+  --gold-900: #2e230a;
+
+  /* Rose / romantic */
+  --rose-300: #f0b8c8;
+  --rose-400: #e8a0b4;
+  --rose-500: #C2809A;
+
+  /* Champagne – subtle text highlight */
+  --champagne: #F7EDD0;
+
+  /* Holographic colors – kept for accents */
   --holographic-1: #667eea;
   --holographic-2: #764ba2;
   --holographic-3: #f093fb;
   --holographic-4: #4facfe;
   --holographic-5: #00f2fe;
-
-  /* Neon colors */
-  --neon-pink: #FF6B9D;
-  --neon-cyan: #00D9FF;
-  --neon-yellow: #F8B500;
 }
 
 * {
@@ -32,7 +52,7 @@ html {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-dm-sans);
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -47,17 +67,17 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--holographic-1), var(--holographic-2));
+  background: linear-gradient(180deg, var(--gold-600), var(--gold-800));
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--holographic-2), var(--holographic-3));
+  background: linear-gradient(180deg, var(--gold-500), var(--gold-700));
 }
 
 /* Selection */
 ::selection {
-  background: var(--holographic-1);
+  background: var(--gold-600);
   color: white;
 }
 
@@ -69,7 +89,7 @@ a {
 
 /* Focus styles */
 :focus-visible {
-  outline: 2px solid var(--holographic-1);
+  outline: 2px solid var(--gold-500);
   outline-offset: 2px;
 }
 
@@ -78,12 +98,45 @@ a {
     text-wrap: balance;
   }
 
-  /* Gradient text */
+  /* Gradient text (holographic – kept for legacy) */
   .gradient-text {
     background: linear-gradient(135deg, var(--holographic-1), var(--holographic-2), var(--holographic-3));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  /* Gold luxury text */
+  .gold-text {
+    background: linear-gradient(
+      135deg,
+      var(--gold-300) 0%,
+      var(--gold-500) 40%,
+      var(--gold-200) 60%,
+      var(--gold-500) 80%,
+      var(--gold-400) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: goldShimmer 5s linear infinite;
+  }
+
+  /* Champagne / pale gold text */
+  .champagne-text {
+    color: var(--champagne);
+  }
+
+  /* Thin gold divider line */
+  .gold-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-500), transparent);
+  }
+
+  /* Gold glow */
+  .glow-gold {
+    box-shadow: 0 0 24px rgba(201, 168, 76, 0.25), 0 0 60px rgba(201, 168, 76, 0.08);
   }
 
   /* Glass effect */
@@ -154,6 +207,12 @@ a {
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+}
+
+/* Gold shimmer animation */
+@keyframes goldShimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
 }
 
 /* GSAP ScrollTrigger markers (dev only) */
