@@ -30,7 +30,7 @@ export default function About() {
           transition={{ delay: 0.2 }}
           className="text-night-900/70 leading-relaxed max-w-xl mx-auto"
         >
-          Chaque sac Néra naît dans notre atelier, du choix du cuir pleine
+          Chaque sac Yurah naît dans notre atelier, du choix du cuir pleine
           fleur jusqu&apos;à la dernière piqûre sellier. Nous travaillons des
           teintes minérales — sable, argile, terracotta — pour que chaque
           pièce se patine et raconte une histoire différente au fil du temps.

@@ -16,7 +16,7 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   const product = getProductBySlug(params.slug)
   if (!product) return {}
   return {
-    title: `${product.name} | Néra`,
+    title: `${product.name} | Yurah`,
     description: product.shortDescription,
   }
 }

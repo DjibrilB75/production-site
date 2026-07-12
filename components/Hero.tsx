@@ -1,12 +1,18 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 
-export default function VideoHero() {
+const SLIDES = [
+  { src: '/hero/dune-sunset.png', alt: 'Sac Yurah posé sur une dune au coucher du soleil' },
+  { src: '/hero/oasis-rider.png', alt: 'Sac Yurah porté dans une oasis' },
+]
+
+export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const videoRef = useRef<HTMLVideoElement>(null)
+  const [active, setActive] = useState(0)
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -14,20 +20,12 @@ export default function VideoHero() {
   })
 
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.12])
 
   useEffect(() => {
-    const video = videoRef.current
-    if (!video) return
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) video.play().catch(() => {})
-        else video.pause()
-      },
-      { threshold: 0.2 }
-    )
-    observer.observe(video)
-    return () => observer.disconnect()
+    const interval = setInterval(() => {
+      setActive((i) => (i + 1) % SLIDES.length)
+    }, 6500)
+    return () => clearInterval(interval)
   }, [])
 
   return (
@@ -36,25 +34,28 @@ export default function VideoHero() {
       className="relative h-[100svh] w-full overflow-hidden bg-night-900"
       style={{ opacity }}
     >
-      <motion.div className="absolute inset-0" style={{ scale }}>
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ filter: 'saturate(0.85) sepia(0.18) contrast(1.02)' }}
+      {SLIDES.map((slide, i) => (
+        <motion.div
+          key={slide.src}
+          className="absolute inset-0"
+          initial={false}
+          animate={{ opacity: active === i ? 1 : 0, scale: active === i ? 1.08 : 1 }}
+          transition={{ opacity: { duration: 1.5, ease: 'easeInOut' }, scale: { duration: 7, ease: 'easeOut' } }}
         >
-          <source src="/videos/hero.mp4" type="video/mp4" />
-        </video>
+          <Image
+            src={slide.src}
+            alt={slide.alt}
+            fill
+            priority={i === 0}
+            sizes="100vw"
+            className="object-cover"
+          />
+        </motion.div>
+      ))}
 
-        {/* Warm desert color grade */}
-        <div className="absolute inset-0 bg-gradient-to-b from-terracotta-900/45 via-terracotta-700/10 to-night-900/60" />
-        <div className="absolute inset-0 bg-gradient-to-t from-sand-900/50 via-transparent to-transparent" />
-        <div className="absolute inset-0 mix-blend-overlay bg-gradient-to-br from-sand-300/25 via-transparent to-terracotta-500/20" />
-      </motion.div>
+      {/* Warm desert color grade */}
+      <div className="absolute inset-0 bg-gradient-to-b from-night-900/50 via-night-900/10 to-night-900/65" />
+      <div className="absolute inset-0 bg-gradient-to-t from-terracotta-900/40 via-transparent to-transparent" />
 
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
         <motion.p
@@ -71,7 +72,7 @@ export default function VideoHero() {
           transition={{ duration: 1, delay: 0.5 }}
           className="font-display text-6xl md:text-8xl text-white drop-shadow-lg mb-6"
         >
-          Néra
+          Yurah
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 16 }}

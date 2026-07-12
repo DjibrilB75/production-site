@@ -48,6 +48,6 @@ export const useAuthStore = create<AuthState>()(
       },
       logout: () => set({ currentUser: null }),
     }),
-    { name: 'nera-auth' }
+    { name: 'yurah-auth' }
   )
 )

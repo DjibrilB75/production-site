@@ -21,7 +21,7 @@ export interface Product {
   bodyColor: string
   strapColor: string
   colorways: ProductColorway[]
-  bagStyle: 'tote' | 'crossbody' | 'bucket'
+  bagStyle: 'tote' | 'crossbody' | 'bucket' | 'satchel'
   inStock: boolean
   isNew?: boolean
 }

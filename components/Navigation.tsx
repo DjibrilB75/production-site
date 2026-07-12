@@ -58,7 +58,7 @@ export default function Navigation() {
                   overDarkHero ? 'text-white drop-shadow-md' : 'text-terracotta-700'
                 )}
               >
-                Néra
+                Yurah
               </span>
             </Link>
 

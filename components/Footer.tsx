@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
           <div className="lg:col-span-2">
             <Link href="/" className="inline-block mb-5">
-              <span className="font-display text-3xl text-sand-200">Néra</span>
+              <span className="font-display text-3xl text-sand-200">Yurah</span>
             </Link>
             <p className="text-dune-100/60 max-w-md leading-relaxed mb-6">
               {companyInfo.tagline}. Des sacs à main façonnés à la main en cuir

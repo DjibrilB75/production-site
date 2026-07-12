@@ -17,12 +17,12 @@ const jost = Jost({
 })
 
 export const metadata: Metadata = {
-  title: 'Néra | Sacs à main d\'inspiration désertique',
-  description: 'Néra crée des sacs à main en cuir, inspirés par les couleurs et la lumière du désert. Pièces artisanales, façonnées pour durer.',
+  title: 'Yurah | Sacs à main d\'inspiration désertique',
+  description: 'Yurah crée des sacs à main en cuir, inspirés par les couleurs et la lumière du désert. Pièces artisanales, façonnées pour durer.',
   keywords: ['sac à main', 'maroquinerie', 'cuir', 'désert', 'artisanal', 'boutique en ligne'],
-  authors: [{ name: 'Néra' }],
+  authors: [{ name: 'Yurah' }],
   openGraph: {
-    title: 'Néra | Sacs à main d\'inspiration désertique',
+    title: 'Yurah | Sacs à main d\'inspiration désertique',
     description: 'Maroquinerie artisanale inspirée par le désert.',
     type: 'website',
     locale: 'fr_FR',

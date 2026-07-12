@@ -30,28 +30,30 @@ export default function AddToCart({ product }: { product: Product }) {
 
   return (
     <div>
-      <div className="mb-6">
-        <p className="text-sm font-medium text-night-900 mb-3">
-          Coloris — <span className="text-night-800/60 font-normal">
-            {product.colorways.find((c) => c.id === colorway)?.label}
-          </span>
-        </p>
-        <div className="flex items-center gap-3">
-          {product.colorways.map((c) => (
-            <button
-              key={c.id}
-              onClick={() => setColorway(c.id)}
-              className={cn(
-                'w-9 h-9 rounded-full border-2 transition-all',
-                colorway === c.id ? 'border-terracotta-600 scale-110' : 'border-transparent hover:scale-105'
-              )}
-              style={{ backgroundColor: c.hex }}
-              aria-label={c.label}
-              title={c.label}
-            />
-          ))}
+      {product.colorways.length > 1 && (
+        <div className="mb-6">
+          <p className="text-sm font-medium text-night-900 mb-3">
+            Coloris — <span className="text-night-800/60 font-normal">
+              {product.colorways.find((c) => c.id === colorway)?.label}
+            </span>
+          </p>
+          <div className="flex items-center gap-3">
+            {product.colorways.map((c) => (
+              <button
+                key={c.id}
+                onClick={() => setColorway(c.id)}
+                className={cn(
+                  'w-9 h-9 rounded-full border-2 transition-all',
+                  colorway === c.id ? 'border-terracotta-600 scale-110' : 'border-transparent hover:scale-105'
+                )}
+                style={{ backgroundColor: c.hex }}
+                aria-label={c.label}
+                title={c.label}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="mb-8">
         <p className="text-sm font-medium text-night-900 mb-3">Quantité</p>

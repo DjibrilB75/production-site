@@ -38,7 +38,7 @@ export default function RegisterPage() {
       <div className="pt-32 pb-24 px-6">
         <div className="max-w-md mx-auto">
           <p className="text-xs tracking-[0.35em] uppercase text-terracotta-600 mb-3 text-center">
-            Rejoindre Néra
+            Rejoindre Yurah
           </p>
           <h1 className="font-display text-4xl text-night-900 mb-10 text-center">Créer un compte</h1>
 

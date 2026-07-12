@@ -16,6 +16,6 @@ export const useOrderStore = create<OrderState>()(
       placeOrder: (order) =>
         set((state) => ({ orders: [...state.orders, order], lastOrderId: order.id })),
     }),
-    { name: 'nera-orders' }
+    { name: 'yurah-orders' }
   )
 )

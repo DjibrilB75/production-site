@@ -56,7 +56,7 @@ export default function CheckoutPage() {
     setProcessing(true)
     setTimeout(() => {
       const order = {
-        id: `NR-${Date.now().toString().slice(-8)}`,
+        id: `YU-${Date.now().toString().slice(-8)}`,
         items,
         total,
         shipping,
