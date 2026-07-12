@@ -4,6 +4,15 @@ export interface ProductColorway {
   hex: string
 }
 
+export interface PhotoModel {
+  front: string
+  back: string
+  left: string
+  right: string
+  /** aspect ratio (width / height) of each cutout, used to size the 3D panels correctly */
+  aspect: { front: number; back: number; left: number; right: number }
+}
+
 export interface Product {
   id: string
   slug: string
@@ -22,6 +31,7 @@ export interface Product {
   strapColor: string
   colorways: ProductColorway[]
   bagStyle: 'tote' | 'crossbody' | 'bucket' | 'satchel'
+  photoModel?: PhotoModel
   inStock: boolean
   isNew?: boolean
 }
