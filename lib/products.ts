@@ -36,7 +36,6 @@ export const products: Product[] = [
       back: '/products/oasis-cabas/cutout-back.png',
       left: '/products/oasis-cabas/cutout-left.png',
       right: '/products/oasis-cabas/cutout-right.png',
-      aspect: { front: 1.1545, back: 1.0482, left: 0.4549, right: 0.4517 },
     },
     inStock: true,
     isNew: true,

@@ -2,9 +2,9 @@
 
 import { Suspense, useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls, RoundedBox, ContactShadows, useTexture } from '@react-three/drei'
+import { OrbitControls, RoundedBox, ContactShadows } from '@react-three/drei'
 import * as THREE from 'three'
-import { Product, PhotoModel } from '@/lib/types'
+import { Product } from '@/lib/types'
 
 function ToteModel({ body, strap, accent }: { body: string; strap: string; accent: string }) {
   return (
@@ -133,63 +133,6 @@ function SatchelModel({ body, strap, accent }: { body: string; strap: string; ac
   )
 }
 
-function PhotoPanel({
-  url,
-  width,
-  height,
-  position,
-  rotationY,
-}: {
-  url: string
-  width: number
-  height: number
-  position: [number, number, number]
-  rotationY: number
-}) {
-  const texture = useTexture(url)
-  texture.colorSpace = THREE.SRGBColorSpace
-  return (
-    <mesh position={position} rotation={[0, rotationY, 0]}>
-      <planeGeometry args={[width, height]} />
-      {/* unlit: the photo already carries its own studio lighting, so scene
-          lights shouldn't re-shade it (that made off-axis panels go dark) */}
-      <meshBasicMaterial map={texture} transparent alphaTest={0.15} side={THREE.DoubleSide} />
-    </mesh>
-  )
-}
-
-function PhotoBillboardBox({ photoModel, body }: { photoModel: PhotoModel; body: string }) {
-  const bagHeight = 1.3
-  const frontW = bagHeight * photoModel.aspect.front
-  const backW = bagHeight * photoModel.aspect.back
-  const depth = (bagHeight * photoModel.aspect.left + bagHeight * photoModel.aspect.right) / 2
-
-  return (
-    <group>
-      {/* dark interior volume so there are no see-through gaps at the seams,
-          including behind the open handle loop near the top */}
-      <RoundedBox args={[frontW * 0.92, bagHeight * 1.06, depth * 0.9]} radius={0.05} smoothness={2} position={[0, -0.02, 0]}>
-        <meshStandardMaterial color={body} roughness={0.6} />
-      </RoundedBox>
-
-      <PhotoPanel url={photoModel.front} width={frontW} height={bagHeight} position={[0, 0, depth / 2]} rotationY={0} />
-      <PhotoPanel url={photoModel.back} width={backW} height={bagHeight} position={[0, 0, -depth / 2]} rotationY={Math.PI} />
-      <PhotoPanel url={photoModel.right} width={depth} height={bagHeight} position={[frontW / 2, 0, 0]} rotationY={Math.PI / 2} />
-      <PhotoPanel url={photoModel.left} width={depth} height={bagHeight} position={[-frontW / 2, 0, 0]} rotationY={-Math.PI / 2} />
-
-      {/* top / bottom caps to close the box for free rotation */}
-      <mesh position={[0, bagHeight / 2, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[frontW * 0.98, depth * 0.98]} />
-        <meshStandardMaterial color={body} roughness={0.6} />
-      </mesh>
-      <mesh position={[0, -bagHeight / 2, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[frontW * 0.98, depth * 0.98]} />
-        <meshStandardMaterial color={body} roughness={0.6} />
-      </mesh>
-    </group>
-  )
-}
-
 function Bag({ product }: { product: Product }) {
   const ref = useRef<THREE.Group>(null)
 
@@ -201,16 +144,10 @@ function Bag({ product }: { product: Product }) {
 
   return (
     <group ref={ref} position={[0, -0.1, 0]}>
-      {product.photoModel ? (
-        <PhotoBillboardBox photoModel={product.photoModel} body={product.bodyColor} />
-      ) : (
-        <>
-          {product.bagStyle === 'tote' && <ToteModel {...props} />}
-          {product.bagStyle === 'crossbody' && <CrossbodyModel {...props} />}
-          {product.bagStyle === 'bucket' && <BucketModel {...props} />}
-          {product.bagStyle === 'satchel' && <SatchelModel {...props} />}
-        </>
-      )}
+      {product.bagStyle === 'tote' && <ToteModel {...props} />}
+      {product.bagStyle === 'crossbody' && <CrossbodyModel {...props} />}
+      {product.bagStyle === 'bucket' && <BucketModel {...props} />}
+      {product.bagStyle === 'satchel' && <SatchelModel {...props} />}
     </group>
   )
 }
@@ -237,8 +174,8 @@ export default function ProductViewer3D({ product }: { product: Product }) {
           enableZoom={true}
           minDistance={2.2}
           maxDistance={5}
-          minPolarAngle={product.photoModel ? 0.2 : Math.PI / 3}
-          maxPolarAngle={product.photoModel ? Math.PI - 0.2 : Math.PI / 1.7}
+          minPolarAngle={Math.PI / 3}
+          maxPolarAngle={Math.PI / 1.7}
         />
       </Canvas>
     </div>

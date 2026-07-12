@@ -9,8 +9,6 @@ export interface PhotoModel {
   back: string
   left: string
   right: string
-  /** aspect ratio (width / height) of each cutout, used to size the 3D panels correctly */
-  aspect: { front: number; back: number; left: number; right: number }
 }
 
 export interface Product {
