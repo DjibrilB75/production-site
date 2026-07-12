@@ -1,45 +1,66 @@
-export interface Project {
-  id: number
-  title: string
-  category: string
-  image: string
-  video?: string
-  description?: string
-  client?: string
-  year: number
-  tags?: string[]
+export interface ProductColorway {
+  id: string
+  label: string
+  hex: string
 }
 
-export interface ContactFormData {
+export interface Product {
+  id: string
+  slug: string
+  name: string
+  category: string
+  price: number
+  compareAtPrice?: number
+  shortDescription: string
+  description: string
+  details: string[]
+  material: string
+  dimensions: string
+  images: string[]
+  accentColor: string
+  bodyColor: string
+  strapColor: string
+  colorways: ProductColorway[]
+  bagStyle: 'tote' | 'crossbody' | 'bucket'
+  inStock: boolean
+  isNew?: boolean
+}
+
+export interface CartItem {
+  productId: string
+  slug: string
+  name: string
+  price: number
+  image: string
+  colorway: string
+  quantity: number
+}
+
+export interface User {
+  id: string
   name: string
   email: string
-  message: string
-  budget?: string
-  projectType?: string[]
 }
 
-export type AnimationVariant = 'fadeIn' | 'slideUp' | 'scale' | 'liquid'
+export interface ShippingInfo {
+  fullName: string
+  address: string
+  city: string
+  postalCode: string
+  country: string
+  phone: string
+}
+
+export interface Order {
+  id: string
+  items: CartItem[]
+  total: number
+  shipping: ShippingInfo
+  email: string
+  createdAt: string
+}
 
 export interface NavLink {
   label: string
   href: string
-}
-
-export interface Service {
-  icon: string
-  label: string
-  description?: string
-}
-
-export interface ChatMessage {
-  id: string
-  content: string
-  sender: 'user' | 'bot'
-  timestamp: Date
-}
-
-export interface SocialLink {
-  platform: string
-  url: string
-  icon: string
 }

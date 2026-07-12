@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100" width="900" height="1100">
+    
+  <defs>
+    <radialGradient id="bgGrad1" cx="50%" cy="38%" r="75%">
+      <stop offset="0%" stop-color="#FDFBF7"/>
+      <stop offset="100%" stop-color="#F1E4CE"/>
+    </radialGradient>
+  </defs>
+  <rect width="900" height="1100" fill="url(#bgGrad1)"/>
+  <ellipse cx="450" cy="946" rx="270" ry="27.5" fill="rgba(43,36,28,0.10)"/>
+  
+    <g transform="rotate(0 450 550)">
+  <g>
+    <ellipse cx="450" cy="419" rx="71.4" ry="113.39999999999999" fill="none" stroke="#D9BC87" stroke-width="14" stroke-linecap="round"/>
+    <path d="M 345 441
+             Q 397.5 415 450 425
+             Q 502.5 415 555 441
+             L 610 659
+             Q 610 685 584 685
+             L 316 685
+             Q 290 685 290 659
+             Z" fill="#A67560" stroke="#6F4636" stroke-width="3"/>
+    <path d="M 450 435 L 450 485" stroke="#6F4636" stroke-width="3"/>
+    <circle cx="440" cy="493" r="7" fill="#6F4636"/>
+    <circle cx="460" cy="499" r="7" fill="#6F4636"/>
+    <circle cx="360.4" cy="687" r="5" fill="#6F4636" opacity="0.5"/>
+    <circle cx="539.6" cy="687" r="5" fill="#6F4636" opacity="0.5"/>
+  </g></g>
+  </svg>

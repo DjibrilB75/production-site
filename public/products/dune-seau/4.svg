@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100" width="900" height="1100">
+    
+  <defs>
+    <linearGradient id="bgGrad4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FBEEE9"/>
+      <stop offset="100%" stop-color="#F3ECE0"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="1100" fill="url(#bgGrad4)"/>
+  <circle cx="684" cy="308.00000000000006" r="99" fill="rgba(230,179,154,0.55)"/>
+  <path d="M0 682 Q 225 605 450 682 T 900 660 V 1100 H0 Z" fill="#E9DCC8"/>
+  <path d="M0 792 Q 270 726 558 803 T 900 770 V 1100 H0 Z" fill="#D9BC87"/>
+  <path d="M0 924 Q 315 869 612 935 T 900 902 V 1100 H0 Z" fill="#A67560"/>
+  
+    <g transform="translate(0 40)">
+  <g>
+    <ellipse cx="450" cy="712.3" rx="44.268" ry="70.30799999999999" fill="none" stroke="#D9BC87" stroke-width="8.68" stroke-linecap="round"/>
+    <path d="M 384.9 724.42
+             Q 417.45 708.3 450 714.5
+             Q 482.55 708.3 515.1 724.42
+             L 549.2 859.58
+             Q 549.2 875.7 533.08 875.7
+             L 366.92 875.7
+             Q 350.8 875.7 350.8 859.58
+             Z" fill="#A67560" stroke="#6F4636" stroke-width="1.8599999999999999"/>
+    <path d="M 450 720.6999999999999 L 450 751.6999999999999" stroke="#6F4636" stroke-width="1.8599999999999999"/>
+    <circle cx="443.8" cy="756.66" r="4.34" fill="#6F4636"/>
+    <circle cx="456.2" cy="760.38" r="4.34" fill="#6F4636"/>
+    <circle cx="394.448" cy="876.94" r="3.1" fill="#6F4636" opacity="0.5"/>
+    <circle cx="505.552" cy="876.94" r="3.1" fill="#6F4636" opacity="0.5"/>
+  </g></g>
+  </svg>

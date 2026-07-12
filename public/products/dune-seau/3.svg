@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100" width="900" height="1100">
+  <defs>
+    <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6F4636"/>
+      <stop offset="100%" stop-color="#A67560"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="1100" fill="url(#bgGrad3)"/>
+  <g opacity="0.5">
+    <path d="M -50 140 Q 450 100 950 150" stroke="#D9BC87" stroke-width="4" fill="none" opacity="0.35"/><path d="M -50 270 Q 450 230 950 280" stroke="#D9BC87" stroke-width="4" fill="none" opacity="0.35"/><path d="M -50 400 Q 450 360 950 410" stroke="#D9BC87" stroke-width="4" fill="none" opacity="0.35"/><path d="M -50 530 Q 450 490 950 540" stroke="#D9BC87" stroke-width="4" fill="none" opacity="0.35"/><path d="M -50 660 Q 450 620 950 670" stroke="#D9BC87" stroke-width="4" fill="none" opacity="0.35"/><path d="M -50 790 Q 450 750 950 800" stroke="#D9BC87" stroke-width="4" fill="none" opacity="0.35"/><path d="M -50 920 Q 450 880 950 930" stroke="#D9BC87" stroke-width="4" fill="none" opacity="0.35"/>
+  </g>
+  <circle cx="450" cy="550" r="150" fill="#A67560" opacity="0.9" stroke="#FDFBF7" stroke-width="6"/>
+  <circle cx="450" cy="550" r="150" fill="none" stroke="#D9BC87" stroke-width="3" stroke-dasharray="10 12" opacity="0.7"/>
+  <rect x="390" y="460" width="120" height="26" rx="13" fill="#FDFBF7" opacity="0.85"/>
+  <circle cx="496" cy="473" r="8" fill="#6F4636"/>
+  <text x="450" y="946" text-anchor="middle" font-family="Georgia, serif" font-size="34" fill="#FDFBF7" opacity="0.9" letter-spacing="6">FAIT MAIN</text>
+  </svg>

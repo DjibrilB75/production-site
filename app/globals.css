@@ -3,20 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --background: #0a0a0f;
-  --foreground: #ffffff;
-
-  /* Holographic colors */
-  --holographic-1: #667eea;
-  --holographic-2: #764ba2;
-  --holographic-3: #f093fb;
-  --holographic-4: #4facfe;
-  --holographic-5: #00f2fe;
-
-  /* Neon colors */
-  --neon-pink: #FF6B9D;
-  --neon-cyan: #00D9FF;
-  --neon-yellow: #F8B500;
+  --background: #FDFBF7;
+  --foreground: #2B241C;
 }
 
 * {
@@ -32,33 +20,33 @@ html {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-jost), system-ui, -apple-system, sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0f;
+  background: #F3ECE0;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--holographic-1), var(--holographic-2));
-  border-radius: 4px;
+  background: #C9A468;
+  border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--holographic-2), var(--holographic-3));
+  background: #B0603D;
 }
 
 /* Selection */
 ::selection {
-  background: var(--holographic-1);
-  color: white;
+  background: #E6B39A;
+  color: #2B241C;
 }
 
 /* Links */
@@ -69,7 +57,7 @@ a {
 
 /* Focus styles */
 :focus-visible {
-  outline: 2px solid var(--holographic-1);
+  outline: 2px solid #B0603D;
   outline-offset: 2px;
 }
 
@@ -78,74 +66,48 @@ a {
     text-wrap: balance;
   }
 
-  /* Gradient text */
+  .font-display {
+    font-family: var(--font-cormorant), serif;
+  }
+
+  /* Warm gradient text */
   .gradient-text {
-    background: linear-gradient(135deg, var(--holographic-1), var(--holographic-2), var(--holographic-3));
+    background: linear-gradient(135deg, #B0603D, #C9A468, #954E31);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  /* Glass effect */
+  /* Glass effect for light backgrounds */
   .glass {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
   }
 
-  /* Holographic border */
-  .holographic-border {
+  .glass-dark {
+    background: rgba(43, 36, 28, 0.35);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  /* Fine grain overlay for warmth */
+  .grain-overlay {
     position: relative;
   }
 
-  .holographic-border::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    padding: 1px;
-    background: linear-gradient(135deg, var(--holographic-1), var(--holographic-2), var(--holographic-3), var(--holographic-4));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    border-radius: inherit;
-    pointer-events: none;
-  }
-
-  /* Glow effects */
-  .glow-pink {
-    box-shadow: 0 0 20px rgba(255, 107, 157, 0.3), 0 0 40px rgba(255, 107, 157, 0.1);
-  }
-
-  .glow-cyan {
-    box-shadow: 0 0 20px rgba(0, 217, 255, 0.3), 0 0 40px rgba(0, 217, 255, 0.1);
-  }
-
-  .glow-purple {
-    box-shadow: 0 0 20px rgba(102, 126, 234, 0.3), 0 0 40px rgba(102, 126, 234, 0.1);
-  }
-
-  /* Text shadow for glow */
-  .text-glow {
-    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
-  }
-
-  /* Noise overlay */
-  .noise-overlay {
-    position: relative;
-  }
-
-  .noise-overlay::after {
+  .grain-overlay::after {
     content: '';
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.03;
+    opacity: 0.05;
+    mix-blend-mode: multiply;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  /* Hide scrollbar but keep functionality */
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -154,185 +116,10 @@ a {
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
-}
 
-/* GSAP ScrollTrigger markers (dev only) */
-.gsap-marker-start,
-.gsap-marker-end,
-.gsap-marker-scroller-start,
-.gsap-marker-scroller-end {
-  font-size: 10px !important;
-}
-
-/* ========================================
-   PETROL FLUID EFFECTS
-   ======================================== */
-
-/* Keyframes for petrol flow animation */
-@keyframes petrolFlow {
-  0%, 100% {
-    background-position: 0% 50%;
+  .shimmer-bg {
+    background: linear-gradient(90deg, #F3ECE0 25%, #F9F3E9 50%, #F3ECE0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2.5s linear infinite;
   }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-@keyframes gradientShift {
-  0% {
-    background-position: 0% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
-}
-
-/* Petrol fluid gradient for text */
-.petrol-text {
-  background: linear-gradient(
-    90deg,
-    #8b5cf6,
-    #3b82f6,
-    #ec4899,
-    #ef4444,
-    #f97316,
-    #fbbf24,
-    #8b5cf6
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradientShift 4s linear infinite;
-}
-
-/* Petrol fluid border for elements */
-.petrol-border {
-  position: relative;
-  border-radius: 16px;
-  overflow: visible;
-}
-
-.petrol-border::before {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  border-radius: 18px;
-  padding: 3px;
-  background: linear-gradient(
-    45deg,
-    #8b5cf6,
-    #3b82f6,
-    #ec4899,
-    #ef4444,
-    #f97316,
-    #fbbf24,
-    #8b5cf6
-  );
-  background-size: 300% 300%;
-  animation: petrolFlow 6s ease infinite;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  z-index: -1;
-}
-
-/* Petrol Shiny Background - Animated gradient */
-.petrol-shiny-bg {
-  background: linear-gradient(
-    135deg,
-    #0f0f1a 0%,
-    #1a1025 15%,
-    #0d1520 30%,
-    #151030 45%,
-    #0a0a15 60%,
-    #1a0a20 75%,
-    #0f1520 90%,
-    #0f0f1a 100%
-  );
-  background-size: 400% 400%;
-  animation: petrolShinyBg 15s ease infinite;
-  position: relative;
-  overflow: hidden;
-}
-
-.petrol-shiny-bg::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 20% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 30%, rgba(59, 130, 246, 0.12) 0%, transparent 50%),
-    radial-gradient(ellipse at 40% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
-    radial-gradient(ellipse at 90% 70%, rgba(249, 115, 22, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 10% 60%, rgba(251, 191, 36, 0.06) 0%, transparent 50%);
-  animation: petrolShinyOverlay 20s ease-in-out infinite alternate;
-  pointer-events: none;
-}
-
-.petrol-shiny-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    45deg,
-    transparent 0%,
-    rgba(139, 92, 246, 0.03) 25%,
-    transparent 50%,
-    rgba(236, 72, 153, 0.03) 75%,
-    transparent 100%
-  );
-  background-size: 200% 200%;
-  animation: petrolShine 8s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes petrolShinyBg {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  25% {
-    background-position: 50% 100%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  75% {
-    background-position: 50% 0%;
-  }
-}
-
-@keyframes petrolShinyOverlay {
-  0% {
-    opacity: 0.8;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1.1);
-  }
-}
-
-@keyframes petrolShine {
-  0% {
-    background-position: 200% 200%;
-  }
-  100% {
-    background-position: -200% -200%;
-  }
-}
-
-/* Petrol gradient for progress bar */
-.petrol-gradient-bg {
-  background: linear-gradient(
-    90deg,
-    #8b5cf6,
-    #3b82f6,
-    #ec4899,
-    #f97316,
-    #fbbf24,
-    #8b5cf6
-  );
-  background-size: 200% 100%;
-  animation: petrolFlow 3s linear infinite;
 }

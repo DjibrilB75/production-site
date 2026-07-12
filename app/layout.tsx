@@ -1,37 +1,31 @@
 import type { Metadata } from 'next'
-import { Sora, Inter, Playfair_Display } from 'next/font/google'
+import { Cormorant_Garamond, Jost } from 'next/font/google'
 import './globals.css'
 
-const sora = Sora({
+const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  variable: '--font-sora',
+  variable: '--font-cormorant',
   display: 'swap',
-  weight: ['400', '600', '700'],
+  weight: ['400', '500', '600', '700'],
 })
 
-const inter = Inter({
+const jost = Jost({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-jost',
   display: 'swap',
-})
-
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  variable: '--font-playfair',
-  display: 'swap',
-  weight: ['400', '500', '600'],
+  weight: ['300', '400', '500', '600'],
 })
 
 export const metadata: Metadata = {
-  title: 'Production Studio | Crafting Visual Stories',
-  description: 'Premium production agency specializing in commercial videography, cinematography, and visual storytelling. Creating immersive visual experiences for brands worldwide.',
-  keywords: ['production', 'videography', 'cinematography', 'commercial', 'brand film', 'visual storytelling'],
-  authors: [{ name: 'Production Studio' }],
+  title: 'Néra | Sacs à main d\'inspiration désertique',
+  description: 'Néra crée des sacs à main en cuir, inspirés par les couleurs et la lumière du désert. Pièces artisanales, façonnées pour durer.',
+  keywords: ['sac à main', 'maroquinerie', 'cuir', 'désert', 'artisanal', 'boutique en ligne'],
+  authors: [{ name: 'Néra' }],
   openGraph: {
-    title: 'Production Studio | Crafting Visual Stories',
-    description: 'Premium production agency specializing in commercial videography and visual storytelling.',
+    title: 'Néra | Sacs à main d\'inspiration désertique',
+    description: 'Maroquinerie artisanale inspirée par le désert.',
     type: 'website',
-    locale: 'en_US',
+    locale: 'fr_FR',
   },
 }
 
@@ -41,9 +35,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="fr" className="scroll-smooth">
       <body
-        className={`${sora.variable} ${inter.variable} ${playfair.variable} antialiased bg-dark-900 text-white`}
+        className={`${cormorant.variable} ${jost.variable} antialiased bg-dune-50 text-night-900`}
       >
         {children}
       </body>

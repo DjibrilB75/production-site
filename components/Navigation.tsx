@@ -1,107 +1,124 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
-import { navLinks } from '@/lib/data'
+import { Menu, X, ShoppingBag, User } from 'lucide-react'
+import { navLinks } from '@/lib/products'
+import { useCartStore, cartCount } from '@/lib/store/cart'
+import { useAuthStore } from '@/lib/store/auth'
 import { cn } from '@/lib/utils'
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+  const pathname = usePathname()
+
+  const items = useCartStore((s) => s.items)
+  const currentUser = useAuthStore((s) => s.currentUser)
+
+  useEffect(() => setMounted(true), [])
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 40)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'unset'
-    }
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : 'unset'
   }, [isMobileMenuOpen])
+
+  const count = mounted ? cartCount(items) : 0
+  // Only the home page has a dark fullscreen hero behind the nav — everywhere
+  // else the background is light, so the nav must stay in its "scrolled" (dark text) look.
+  const overDarkHero = pathname === '/' && !isScrolled
 
   return (
     <>
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
+        transition={{ duration: 0.7, ease: 'easeOut' }}
         className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-500 backdrop-blur-md',
-          isScrolled
-            ? 'bg-dark-900/60 border-b border-white/10'
-            : 'bg-dark-900/30'
+          'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
+          overDarkHero
+            ? 'bg-transparent'
+            : 'bg-dune-50/85 backdrop-blur-md border-b border-terracotta-200/40 shadow-sm'
         )}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <motion.a
-              href="#"
-              className="relative z-10"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span className="font-display text-2xl font-bold gradient-text">
-                STUDIO
+            <Link href="/" className="relative z-10">
+              <span
+                className={cn(
+                  'font-display text-3xl tracking-wide transition-colors',
+                  overDarkHero ? 'text-white drop-shadow-md' : 'text-terracotta-700'
+                )}
+              >
+                Néra
               </span>
-            </motion.a>
+            </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-12">
-              {navLinks.map((link, index) => (
-                <motion.a
+            <div className="hidden md:flex items-center gap-10">
+              {navLinks.map((link) => (
+                <a
                   key={link.href}
                   href={link.href}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * index }}
-                  className="relative text-sm font-medium text-white/70 hover:text-white transition-colors group"
+                  className={cn(
+                    'text-sm font-medium tracking-wide uppercase transition-colors',
+                    overDarkHero
+                      ? 'text-white/90 hover:text-white drop-shadow-sm'
+                      : 'text-night-800/70 hover:text-terracotta-600'
+                  )}
                 >
                   {link.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-holographic-from to-holographic-via1 transition-all duration-300 group-hover:w-full" />
-                </motion.a>
+                </a>
               ))}
             </div>
 
-            {/* Contact Button - Desktop */}
-            <motion.a
-              href="#contact"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="hidden md:block"
-            >
-              <span className="relative inline-flex items-center px-6 py-2.5 text-sm font-medium overflow-hidden rounded-full group">
-                <span className="absolute inset-0 bg-gradient-to-r from-holographic-from via-holographic-via1 to-holographic-via2 opacity-80 group-hover:opacity-100 transition-opacity" />
-                <span className="relative text-white">Get in Touch</span>
-              </span>
-            </motion.a>
+            <div className="flex items-center gap-4">
+              <Link
+                href={currentUser ? '/compte' : '/connexion'}
+                className={cn(
+                  'hidden sm:flex items-center gap-2 text-sm transition-colors',
+                  overDarkHero ? 'text-white hover:text-white/80' : 'text-night-800/80 hover:text-terracotta-600'
+                )}
+              >
+                <User className="w-5 h-5" />
+                <span>{currentUser ? currentUser.name.split(' ')[0] : 'Connexion'}</span>
+              </Link>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden relative z-10 p-2"
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? (
-                <X className="w-6 h-6 text-white" />
-              ) : (
-                <Menu className="w-6 h-6 text-white" />
-              )}
-            </button>
+              <Link
+                href="/panier"
+                className={cn(
+                  'relative flex items-center justify-center w-10 h-10 rounded-full transition-colors',
+                  overDarkHero ? 'text-white hover:bg-white/10' : 'text-night-800 hover:bg-sand-100'
+                )}
+                aria-label="Panier"
+              >
+                <ShoppingBag className="w-5 h-5" />
+                {count > 0 && (
+                  <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-full bg-terracotta-500 text-white text-[10px] font-semibold">
+                    {count}
+                  </span>
+                )}
+              </Link>
+
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className={cn('md:hidden p-2', overDarkHero ? 'text-white' : 'text-night-800')}
+                aria-label="Menu"
+              >
+                {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
           </div>
         </div>
       </motion.nav>
 
-      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -109,78 +126,43 @@ export default function Navigation() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 md:hidden"
+            className="fixed inset-0 z-40 md:hidden bg-dune-50/98 backdrop-blur-xl"
           >
-            {/* Background */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-dark-900/95 backdrop-blur-xl"
-            />
-
-            {/* Animated background shapes */}
-            <div className="absolute inset-0 overflow-hidden">
+            <div className="h-full flex flex-col items-center justify-center gap-8 px-6">
+              {navLinks.map((link, index) => (
+                <motion.a
+                  key={link.href}
+                  href={link.href}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.08 * index }}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-4xl font-display text-terracotta-700"
+                >
+                  {link.label}
+                </motion.a>
+              ))}
               <motion.div
-                animate={{
-                  scale: [1, 1.2, 1],
-                  rotate: [0, 180, 360],
-                }}
-                transition={{
-                  duration: 20,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
-                className="absolute -top-1/4 -right-1/4 w-[80vw] h-[80vw] rounded-full bg-gradient-to-br from-holographic-from/20 to-holographic-via1/10 blur-3xl"
-              />
-              <motion.div
-                animate={{
-                  scale: [1.2, 1, 1.2],
-                  rotate: [360, 180, 0],
-                }}
-                transition={{
-                  duration: 25,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
-                className="absolute -bottom-1/4 -left-1/4 w-[60vw] h-[60vw] rounded-full bg-gradient-to-tr from-holographic-via2/20 to-holographic-to/10 blur-3xl"
-              />
-            </div>
-
-            {/* Menu Content */}
-            <div className="relative h-full flex flex-col items-center justify-center px-6">
-              <nav className="flex flex-col items-center gap-8">
-                {navLinks.map((link, index) => (
-                  <motion.a
-                    key={link.href}
-                    href={link.href}
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 20 }}
-                    transition={{ delay: 0.1 * index }}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-4xl font-display font-bold text-white hover:text-holographic-from transition-colors"
-                  >
-                    {link.label}
-                  </motion.a>
-                ))}
-              </nav>
-
-              {/* Contact Button - Mobile */}
-              <motion.a
-                href="#contact"
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ delay: 0.4 }}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="mt-12"
+                transition={{ delay: 0.2 }}
+                className="flex flex-col items-center gap-4 mt-6"
               >
-                <span className="relative inline-flex items-center px-8 py-4 text-lg font-medium overflow-hidden rounded-full group">
-                  <span className="absolute inset-0 bg-gradient-to-r from-holographic-from via-holographic-via1 to-holographic-via2" />
-                  <span className="relative text-white">Get in Touch</span>
-                </span>
-              </motion.a>
+                <Link
+                  href={currentUser ? '/compte' : '/connexion'}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-lg text-night-800/80"
+                >
+                  {currentUser ? `Bonjour, ${currentUser.name.split(' ')[0]}` : 'Se connecter'}
+                </Link>
+                <Link
+                  href="/panier"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-lg text-night-800/80"
+                >
+                  Voir le panier ({count})
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         )}

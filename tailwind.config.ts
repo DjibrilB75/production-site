@@ -9,84 +9,83 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        display: ['var(--font-sora)', 'sans-serif'],
-        sans: ['var(--font-inter)', 'system-ui'],
-        accent: ['var(--font-playfair)', 'serif'],
+        display: ['var(--font-cormorant)', 'serif'],
+        sans: ['var(--font-jost)', 'system-ui', 'sans-serif'],
       },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        holographic: {
-          from: '#667eea',
-          via1: '#764ba2',
-          via2: '#f093fb',
-          via3: '#4facfe',
-          to: '#00f2fe',
+        sand: {
+          50: '#FDFBF7',
+          100: '#F9F3E9',
+          200: '#F1E4CE',
+          300: '#E6D2AE',
+          400: '#D9BC87',
+          500: '#C9A468',
+          600: '#B08A4E',
+          700: '#8C6D3D',
+          800: '#6B5230',
+          900: '#4A3820',
         },
-        neon: {
-          pink: '#FF6B9D',
-          cyan: '#00D9FF',
-          yellow: '#F8B500',
+        terracotta: {
+          50: '#FBEEE9',
+          100: '#F3D5C7',
+          200: '#E6B39A',
+          300: '#D6906C',
+          400: '#C2724B',
+          500: '#B0603D',
+          600: '#954E31',
+          700: '#753D26',
+          800: '#552C1B',
+          900: '#3A1E12',
         },
-        dark: {
-          900: '#0a0a0f',
-          800: '#12121a',
-          700: '#1a1a25',
-          600: '#252530',
+        clay: {
+          400: '#A67560',
+          500: '#8C5C48',
+          600: '#6F4636',
+        },
+        dune: {
+          50: '#FAF7F2',
+          100: '#F3ECE0',
+          200: '#E9DCC8',
+        },
+        night: {
+          800: '#2B241C',
+          900: '#1E1912',
         },
       },
       animation: {
-        'liquid-flow': 'liquid-flow 8s ease-in-out infinite',
-        'float': 'float 6s ease-in-out infinite',
-        'spin-slow': 'spin 20s linear infinite',
-        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
-        'gradient-x': 'gradient-x 15s ease infinite',
-        'shimmer': 'shimmer 2s linear infinite',
+        float: 'float 7s ease-in-out infinite',
+        'fade-up': 'fade-up 0.8s ease-out forwards',
+        shimmer: 'shimmer 2.5s linear infinite',
+        drift: 'drift 30s linear infinite',
       },
       keyframes: {
-        'liquid-flow': {
-          '0%, 100%': {
-            borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%',
-            transform: 'rotate(0deg)',
-          },
-          '50%': {
-            borderRadius: '30% 60% 70% 40% / 50% 60% 30% 60%',
-            transform: 'rotate(180deg)',
-          },
-        },
-        'float': {
+        float: {
           '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-20px)' },
+          '50%': { transform: 'translateY(-14px)' },
         },
-        'pulse-glow': {
-          '0%, 100%': {
-            boxShadow: '0 0 20px rgba(102, 126, 234, 0.5)',
-            opacity: '1',
-          },
-          '50%': {
-            boxShadow: '0 0 40px rgba(102, 126, 234, 0.8)',
-            opacity: '0.8',
-          },
+        'fade-up': {
+          '0%': { opacity: '0', transform: 'translateY(24px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        'gradient-x': {
-          '0%, 100%': {
-            'background-size': '200% 200%',
-            'background-position': 'left center',
-          },
-          '50%': {
-            'background-size': '200% 200%',
-            'background-position': 'right center',
-          },
-        },
-        'shimmer': {
+        shimmer: {
           '0%': { backgroundPosition: '-200% 0' },
           '100%': { backgroundPosition: '200% 0' },
+        },
+        drift: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'holographic': 'linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%)',
-        'dark-gradient': 'linear-gradient(180deg, #0a0a0f 0%, #12121a 50%, #0a0a0f 100%)',
+        'desert-gradient': 'linear-gradient(180deg, #FDFBF7 0%, #F3ECE0 55%, #E9DCC8 100%)',
+        'sunset-gradient': 'linear-gradient(135deg, #F3D5C7 0%, #E6B39A 45%, #C2724B 100%)',
+      },
+      boxShadow: {
+        soft: '0 8px 30px rgba(139, 108, 66, 0.12)',
+        card: '0 4px 24px rgba(107, 82, 48, 0.08)',
       },
     },
   },
